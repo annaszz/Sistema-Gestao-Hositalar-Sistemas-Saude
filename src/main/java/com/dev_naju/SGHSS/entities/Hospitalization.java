@@ -2,7 +2,7 @@ package com.dev_naju.SGHSS.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "tb_hospitalization")
@@ -20,16 +20,16 @@ public class Hospitalization {
     private Bed bed;
 
     @Temporal(TemporalType.DATE)
-    private Date admissionDate;
+    private LocalDate admissionDate;
 
     @Temporal(TemporalType.DATE)
-    private Date dischargeDate;
+    private LocalDate dischargeDate;
 
     private String diagnosis;
 
     public Hospitalization(){}
 
-    public Hospitalization(Patient patient, Bed bed, Date admissionDate) {
+    public Hospitalization(Patient patient, Bed bed, LocalDate admissionDate) {
         this.patient = patient;
         this.bed = bed;
         this.admissionDate = admissionDate;
@@ -59,19 +59,19 @@ public class Hospitalization {
         this.bed = bed;
     }
 
-    public Date getAdmissionDate() {
+    public LocalDate getAdmissionDate() {
         return admissionDate;
     }
 
-    public void setAdmissionDate(Date admissionDate) {
+    public void setAdmissionDate(LocalDate admissionDate) {
         this.admissionDate = admissionDate;
     }
 
-    public Date getDischargeDate() {
+    public LocalDate getDischargeDate() {
         return dischargeDate;
     }
 
-    public void setDischargeDate(Date dischargeDate) {
+    public void setDischargeDate(LocalDate dischargeDate) {
         this.dischargeDate = dischargeDate;
     }
 

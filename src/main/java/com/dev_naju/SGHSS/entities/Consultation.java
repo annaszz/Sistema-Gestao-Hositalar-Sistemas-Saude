@@ -1,7 +1,10 @@
 package com.dev_naju.SGHSS.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -13,11 +16,11 @@ public class Consultation {
 
     private String typeConsultation;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="patient_id", nullable = false)
+    @JsonBackReference
     private Patient patient;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,10 +29,11 @@ public class Consultation {
 
     public Consultation(){}
 
-    public Consultation(String typeConsultation, Date date, Patient patient) {
+    public Consultation(String typeConsultation, LocalDateTime date, Patient patient, ProfessionalHealth professional) {
         this.typeConsultation = typeConsultation;
         this.date = date;
         this.patient = patient;
+        this.professional = professional;
     }
 
     public Long getId() {
@@ -48,11 +52,11 @@ public class Consultation {
         this.typeConsultation = typeConsultation;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

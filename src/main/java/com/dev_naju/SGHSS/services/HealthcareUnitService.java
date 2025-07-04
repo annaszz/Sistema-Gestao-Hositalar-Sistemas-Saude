@@ -16,5 +16,4 @@ public class HealthcareUnitService {
         return healthcareUnitRepository.findAll();
     }
 
-
 }

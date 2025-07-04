@@ -1,14 +1,14 @@
 package com.dev_naju.SGHSS.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_record")
-public class Record {
+public class RecordPatient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,13 +20,14 @@ public class Record {
 
     @OneToOne
     @JoinColumn(name = "patient_id", unique = true, nullable = false)
+    @JsonBackReference
     private Patient patient;
 
-    public Record(){
+    public RecordPatient(){
         this.openDate = new Date();
     }
 
-    public Record(Date openDate, Patient patient) {
+    public RecordPatient(Date openDate, Patient patient) {
         this.openDate = openDate;
         this.patient = patient;
 
@@ -63,8 +64,8 @@ public class Record {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Record record = (Record) o;
-        return Objects.equals(id, record.id);
+        RecordPatient recordPatient = (RecordPatient) o;
+        return Objects.equals(id, recordPatient.id);
     }
 
     @Override

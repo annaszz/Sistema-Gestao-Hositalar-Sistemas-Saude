@@ -1,38 +1,35 @@
 package com.dev_naju.SGHSS.entities;
 
+import com.dev_naju.SGHSS.enums.ProfessionalRole;
+import com.dev_naju.SGHSS.enums.UserRole;
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.*;
 
 @Entity
 @Table(name = "tb_professional")
-public class ProfessionalHealth {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@PrimaryKeyJoinColumn(name = "id")
+public class ProfessionalHealth extends UserSystem{
     private String name;
-    private String registrationNumber;
-    private String professionType;
+    private String crm;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ProfessionalRole professionalRole;
 
     @OneToMany(mappedBy="professional")
     private Set<Consultation> consultations = new HashSet<>();
 
     public ProfessionalHealth(){}
 
-    public ProfessionalHealth(String name, String registrationNumber, String professionType) {
+    public ProfessionalHealth(String login, String password, String name, String crm, ProfessionalRole professionalRole) {
+        super(login, password, UserRole.PROFESSIONAL_HEALTH);
         this.name = name;
-        this.registrationNumber = registrationNumber;
-        this.professionType = professionType;
+        this.crm = crm;
+        this.professionalRole = professionalRole;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -42,20 +39,20 @@ public class ProfessionalHealth {
         this.name = name;
     }
 
-    public String getRegistrationNumber() {
-        return registrationNumber;
+    public String getCrm() {
+        return crm;
     }
 
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
+    public void setCrm(String crm) {
+        this.crm = crm;
     }
 
-    public String getProfessionType() {
-        return professionType;
+    public ProfessionalRole getProfessionalRole() {
+        return professionalRole;
     }
 
-    public void setProfessionType(String professionType) {
-        this.professionType = professionType;
+    public void setProfessionalRole(ProfessionalRole professionalRole) {
+        this.professionalRole = professionalRole;
     }
 
     public Set<Consultation> getConsultations() {

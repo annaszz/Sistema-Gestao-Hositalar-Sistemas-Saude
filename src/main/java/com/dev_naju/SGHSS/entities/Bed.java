@@ -13,7 +13,6 @@ public class Bed {
     private Long id;
 
     private String status;
-    private String type;
     private int number;
 
     @ManyToOne
@@ -22,21 +21,11 @@ public class Bed {
 
     public Bed(){}
 
-    public Bed(Long id, String status, String type, int number, HealthcareUnit healthcareUnit) {
-        this.id = id;
+    public Bed(String status, int number, HealthcareUnit healthcareUnit) {
         this.status = status;
-        this.type = type;
         this.number = number;
         this.healthcareUnit = healthcareUnit;
     }
-
-    public Bed(String status, String type, int number, HealthcareUnit healthcareUnit) {
-        this.status = status;
-        this.type = type;
-        this.number = number;
-        this.healthcareUnit = healthcareUnit;
-    }
-
 
     public Long getId() {
         return id;
@@ -54,14 +43,6 @@ public class Bed {
         this.status = status;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public int getNumber() {
         return number;
     }
@@ -76,17 +57,5 @@ public class Bed {
 
     public void setHealthcareUnit(HealthcareUnit healthcareUnit) {
         this.healthcareUnit = healthcareUnit;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Bed bed = (Bed) o;
-        return Objects.equals(id, bed.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
     }
 }
